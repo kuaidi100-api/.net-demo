@@ -1,0 +1,7 @@
+﻿
+*.nupkg
+*.nuspec
+*_bak
+/*.vscode
+/bin
+/obj
