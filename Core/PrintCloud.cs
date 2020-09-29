@@ -7,7 +7,7 @@ public class PrintCloud{
 
 
     public static string query(PrintCloudReq param){
-        
+
         var request = ObjectToDictionaryUtils.ObjectToMap(param);
         
         if(request == null){

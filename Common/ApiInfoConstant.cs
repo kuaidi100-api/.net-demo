@@ -18,7 +18,7 @@ public class ApiInfoConstant{
     /**
      * 智能单号识别url
      */
-    public static string AUTO_NUM_URL = "http://www.kuaidi100.com/autonumber/auto?num={0}&key={1}";
+    public const string AUTO_NUM_URL = "http://www.kuaidi100.com/autonumber/auto?num={0}&key={1}";
     /**
      * 电子面单html url
      */
@@ -67,5 +67,25 @@ public class ApiInfoConstant{
      * 复打方法
      */
     public const string SEND_SMS_URL = "http://apisms.kuaidi100.com:9502/sms/send.do";
+    /**
+     * 商家寄件
+     */
+    public const  string B_ORDER_URL = "https://order.kuaidi100.com/order/borderbestapi.do";
+    /**
+     * 商家寄件查询运力
+     */
+    public const  string B_ORDER_QUERY_TRANSPORT_CAPACITY_METHOD = "querymkt";
+    /**
+     * 商家寄件下单
+     */
+    public const  string B_ORDER_SEND_METHOD = "bOrderBest";
+    /**
+     * 商家寄件获取验证码
+     */
+    public const  string B_ORDER_CODE_METHOD = "getCode";
+    /**
+     * 商家寄件取消
+     */
+    public const  string B_ORDER_CANCEL_METHOD = "cancelBest";
 }
 }

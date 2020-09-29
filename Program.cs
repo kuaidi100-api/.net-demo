@@ -10,6 +10,7 @@ using Common.Request.Electronic.Html;
 using Common.Request.Electronic;
 using Common.Request.Electronic.Print;
 using Common.Request.Sms;
+using Common.Request.Border;
 using System.Collections;
 
 class Program
@@ -28,13 +29,17 @@ class Program
     };
     static void Main(string[] args)
     {
-        testQueryTrack();
+        // testQueryTrack();
         //testSubscribe();
         // testPrintImg();
         // testPrintHtml();
         // testPrintCloud();
         // testSendSms();
         // testAutoNum();
+        // testBOrderQuery();
+        // testBOrder();
+        // testBOrderGetCode();
+        // testBOrderCancel();
     }
 
     /// <summary>
@@ -208,5 +213,99 @@ class Program
     static void testAutoNum()
     {
         AutoNum.query("773039762404825",config.key);
+    }
+
+    /// <summary>
+    /// 商家寄件查询运力
+    /// </summary>
+    static void testBOrderQuery()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new BOrderQueryParam(){
+            sendAddr = "福田区华强北"
+        };
+        BaseReq<BOrderQueryParam> baseReq = new BaseReq<BOrderQueryParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        Border.transportCapacity(baseReq);
+    }
+
+    /// <summary>
+    /// 商家寄件下单
+    /// 注意保存一下返回值(taskId和orderId),用于获取验证码或者取消订单
+    /// </summary>
+    static void testBOrder()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new BOrderParam(){
+            kuaidicom = "jtexpress",
+            recManName = "张三",
+            recManMobile = "159953225555",
+            recManPrintAddr = "深圳市南山区金蝶软件园",
+            sendManName = "李四",
+            sendManMobile = "15333333333",
+            sendManPrintAddr = "深圳福田区华强北",
+            cargo = "文件",
+            weight = "1",
+            remark = "测试单，待会取消",
+            salt = "123",
+            callBackUrl = "http://www.baidu.com",
+            serviceType = "标准快递"
+        };
+        BaseReq<BOrderParam> baseReq = new BaseReq<BOrderParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        Border.order(baseReq);
+    }
+
+    /// <summary>
+    /// 商家寄件获取验证码
+    /// 入参为下单接口返回的taskId和orderId
+    /// </summary>
+    static void testBOrderGetCode()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new BOrderGetCodeParam(){
+            taskId = "15BABC55F7666****6ECEEDD70F0CB6E",
+            orderId = "100012****78934"
+        };
+        BaseReq<BOrderGetCodeParam> baseReq = new BaseReq<BOrderGetCodeParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        Border.getCode(baseReq);
+    }
+
+    /// <summary>
+    /// 商家寄件取消寄件
+    /// 入参为下单接口返回的taskId和orderId
+    /// </summary>
+    static void testBOrderCancel()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new BOrderCancelParam(){
+            taskId = "15BABC55F7666****6ECEEDD70F0CB6E",
+            orderId = "100012****78934",
+            cancelMsg = "测试单"
+        };
+        BaseReq<BOrderCancelParam> baseReq = new BaseReq<BOrderCancelParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        Border.cancel(baseReq);
     }
 }
