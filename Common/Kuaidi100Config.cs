@@ -19,7 +19,7 @@ namespace Common{
         /// </summary>
         public string secret { get; set; }
         /// <summary>
-        /// 电子面单模板id
+        /// 快递100打印机或者云盒设备码（使用电子面单打印接口或云打印相关接口必填）
         /// </summary>
         public string siid { get; set; }
         /// <summary>
