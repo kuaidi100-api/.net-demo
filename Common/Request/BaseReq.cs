@@ -1,9 +1,9 @@
-namespace Common.Request.Border
+namespace Common.Request
 {
     public class BaseReq<T>{
 
         /// <summary>
-        /// 业务类型（默认：getPrintImg）
+        /// 业务类型
         /// </summary>
         public string method {get; set;}
         /// <summary>
