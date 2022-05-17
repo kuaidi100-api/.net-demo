@@ -17,6 +17,7 @@ using Common.Request.samecity;
 using Common.Request.thirdPlatform;
 using System.Collections;
 using System.Collections.Generic;
+using Common.Request.Electronic.ocr;
 
 class Program
 {
@@ -60,10 +61,10 @@ class Program
         // testSameCityOrder();
         // testSameCityQuery();
         // testSameCityCancel();
-        testThirdPlatformAuth();
+        // testThirdPlatformAuth();
         // testThirdPlatBranchInfo();
         // testLabelCancel();
-
+        testOcr();
     }
 
     /// <summary>
@@ -630,7 +631,7 @@ class Program
     }
 
     /// <summary>
-    /// 订单获取结果推送接口
+    /// 快递单号回传及订单发货接口
     /// </summary>
     static void testThirdPlatformUploadNum()
     {
@@ -832,6 +833,25 @@ class Program
             param = baseParam
         };
         PrintCloud.cancel(baseReq);
+
+    }
+
+     /// <summary>
+    /// 快递面单OCR识别接口
+    /// </summary>
+    static void testOcr()
+    {
+
+        var baseParam = new OcrParam()
+        {
+            image = "132"
+        };
+        BaseReq<OcrParam> baseReq = new BaseReq<OcrParam>()
+        {
+            key = config.key,
+            param = baseParam
+        };
+        Ocr.ocr(baseReq);
 
     }
 }

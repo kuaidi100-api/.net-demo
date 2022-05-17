@@ -175,5 +175,10 @@ public class ApiInfoConstant{
     ///  面单余额接口方法
     /// </summary>
     public const string THIRD_PLATFORM_BRANCH_INFO_METHOD = "getThirdInfo";
+    
+    /// <summary>
+    ///  快递面单OCR识别接口
+    /// </summary>
+    public const string OCR_URL = "http://api.kuaidi100.com/elec/detocr";
 }
 }
