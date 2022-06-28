@@ -839,5 +839,134 @@ class Program
         PrintCloud.cancel(baseReq);
 
     }
+
+    /// <summary>
+    /// 快递面单OCR识别接口
+    /// </summary>
+    static void testOcr()
+    {
+
+        var baseParam = new OcrParam()
+        {
+            image = "132"
+        };
+        BaseReq<OcrParam> baseReq = new BaseReq<OcrParam>()
+        {
+            key = config.key,
+            param = baseParam
+        };
+        Ocr.ocr(baseReq);
+
+    }
+
+    /// <summary>
+    /// 商家寄件查询订单详情
+    /// </summary>
+    static void testBOrderOfficialQueryDetail()
+    {
+
+        var baseParam = new BOrderOfficialQueryDetailParam()
+        {
+            taskId = "9FC293CA417E431F33046E64F4C4EC20"
+        };
+        var timestamp = DateUtils.GetTimestamp();
+        BaseReq<BOrderOfficialQueryDetailParam> baseReq = new BaseReq<BOrderOfficialQueryDetailParam>()
+        {
+            key = config.key,
+            param = baseParam,
+            method = ApiInfoConstant.ORDER,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret)
+        };
+        BOrderOfficial.queryDetail(baseReq);
+
+    }
+
+    /// <summary>
+    /// 电子面单V2打印接口
+    /// </summary>
+    static void testLabelOrder()
+    {
+        var orderParam = new OrderParam()
+        {
+            kuaidicom = "zhaijisong",
+            sendMan = new ManInfo()
+            {
+                name = "张三",
+                mobile = "15****98256",
+                printAddr = "广东省深圳市南山区科技南十二路",
+            },
+            recMan = new ManInfo()
+            {
+                name = "李四",
+                mobile = "15****98256",
+                printAddr = "北京市海淀区xxx路",
+            },
+            count = 1,
+            siid = config.siid,
+            tempId = "60f6c17c7c223700131d8bc3",
+            printType = "CLOUD"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.order(new BaseReq<OrderParam>()
+        {
+            method = ApiInfoConstant.ORDER,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
+            param = orderParam,
+        });
+    }
+
+     /// <summary>
+    /// 电子面单V2复打接口
+    /// </summary>
+    static void testLabelRepeatPrint()
+    {
+        var orderParam = new RepeatPrintParam()
+        {
+            
+            taskId = "638687EEB4744396A40F693541114E44"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.repeatPrint(new BaseReq<RepeatPrintParam>()
+        {
+            method = ApiInfoConstant.CLOUD_PRINT_OLD_METHOD,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
+            param = orderParam,
+        });
+    }
+
+     /// <summary>
+    /// 自定义接口
+    /// </summary>
+    static void testLabelCustomPrint()
+    {
+
+        var customParam =  new Dictionary<string, object>();
+        customParam.Add( "qrcode","888888888");
+        var orderParam = new CustomPrintParam()
+        {
+            
+            siid = config.siid,
+            tempId = "41b9d19ee56b45b5a23d7b6ace4f9029",
+            printType = "IMAGE",
+            customParam = customParam
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.customPrint(new BaseReq<CustomPrintParam>()
+        {
+            method = ApiInfoConstant.CUSTOM,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
+            param = orderParam,
+        });
+    }
 }
 ```
