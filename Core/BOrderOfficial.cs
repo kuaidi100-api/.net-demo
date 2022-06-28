@@ -58,4 +58,21 @@ public static class BOrderOfficial
         var result = HttpUtils.doPostForm(ApiInfoConstant.B_ORDER_OFFICIAL_URL,request);
         return result;
     }
+
+     /// <summary>
+    /// 查看订单详情
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+     public static string queryDetail(BaseReq<BOrderOfficialQueryDetailParam> param){
+        
+        param.method = ApiInfoConstant.DETAIL;
+        var request = ObjectToDictionaryUtils.ObjectToMap(param);
+        
+        if(request == null){
+            return null;
+        }
+        var result = HttpUtils.doPostForm(ApiInfoConstant.B_ORDER_OFFICIAL_URL,request);
+        return result;
+    }
 }

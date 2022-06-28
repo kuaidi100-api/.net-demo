@@ -14,6 +14,22 @@ namespace  Common.Request.Electronic.ocr
     /// </summary>
     /// <value></value>
     public bool enableTilt {get; set;}
+    /// <summary>
+    /// 图片URL。image、imageUrl、pdfUrl三者必填其一，优先顺序：image>imageUrl>pdfUrl，最大长度不超过1024b，下载超时默认为2s
+    /// </summary>
+    /// <value></value>
+    public string imageUrl {get; set;}
+
+    /// <summary>
+    /// 需要检测识别的面单元素。取值范围：barcode,qrcode,receiver,sender,bulkpen。不传或者 null 则默认为 ["barcode", "receiver", "sender"]
+    /// </summary>
+    /// <value></value>
+    public string[] include {get; set;}
+    /// <summary>
+    /// PDF文件URL。image、imageUrl、pdfUrl三者必填其一，优先顺序：image>imageUrl>pdfUrl，最大长度不超过1024b，下载超时默认为2s
+    /// </summary>
+    /// <value></value>
+    public string pdfUrl {get; set;}
 
      public override string ToString()
         {
