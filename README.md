@@ -170,7 +170,7 @@ class Program
     }
 
     /// <summary>
-    /// 电子面单图片接口
+    /// 电子面单图片v1接口(推荐使用v2版本)
     /// </summary>
     static void testPrintImg()
     {
@@ -202,7 +202,7 @@ class Program
     }
 
     /// <summary>
-    /// 电子面单html接口
+    /// 电子面单html v1接口(推荐使用v2版本)
     /// </summary>
     static void testPrintHtml()
     {
@@ -237,7 +237,7 @@ class Program
     }
 
     /// <summary>
-    /// 电子面单打印接口
+    /// 电子面单打印v1接口(推荐使用v2版本)
     /// </summary>
     static void testPrintCloud()
     {
@@ -457,7 +457,7 @@ class Program
     }
 
     /// <summary>
-    /// 自定义打印接口
+    /// 自定义打印v1接口(推荐使用v2版本)
     /// </summary>
     static void testCloudPrintCustom()
     {
@@ -502,7 +502,7 @@ class Program
     }
 
     /// <summary>
-    /// 复打
+    /// 复打v1(推荐使用v2版本)
     /// </summary>
     static void testCloudPrintOld()
     {
