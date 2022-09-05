@@ -198,5 +198,17 @@ namespace Common
         /// 详情
         /// </summary>
         public const String DETAIL = "detail";
+        /// <summary>
+        ///  C端寄件下单接口url
+        /// </summary>
+        public const string C_ORDER_URL = "https://order.kuaidi100.com/order/corderapi.do";
+        /// <summary>
+        ///  价格
+        /// </summary>
+        public const string PRICE = "price";
+        /// <summary>
+        /// cOrder
+        /// </summary>
+        public const string CORDER = "cOrder";
     }
 }

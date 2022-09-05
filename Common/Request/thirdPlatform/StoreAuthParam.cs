@@ -15,7 +15,7 @@ namespace Common.Request.thirdPlatform
         /// <summary>
         /// 授权后信息的信息回调地址
         /// </summary>
-        public string callbackUrl { get; set; }
+        public string callBackUrl { get; set; }
 
         public override string ToString()
         {

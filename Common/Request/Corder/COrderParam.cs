@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
 
-namespace Common.Request.BorderOfficial
+namespace Common.Request.Corder
 {
-    public class BOrderOfficialOrderParam {
+    public class COrderParam {
 
     
         /// <summary>
@@ -54,37 +54,30 @@ namespace Common.Request.BorderOfficial
         /// </summary>
         public string callBackUrl {get; set;}
         /// <summary>
-        /// 快递业务服务类型，例：标准快递，默认为标准快递
-        /// </summary>
-        public string serviceType {get; set;}
-         /// <summary>
         /// 预约日期，例如：今天/明天/后天
         /// </summary>
         public string dayType {get; set;}
+        
         /// <summary>
         /// 预约起始时间，24小时制（HH:mm），例如：09:00
         /// </summary>
         public string pickupStartTime {get; set;}
+        
         /// <summary>
         /// 预约截止时间，24小时制（HH:mm），例如：10:00
         /// </summary>
         public string pickupEndTime {get; set;}
-        /// <summary>
-        /// 保价额度，单位：元
-        /// </summary>
-        public string valinsPay {get; set;}   
-        /// <summary>
-        /// 是否口令签收，Y：需要 N: 不需要，默认值为N（德邦快递专属参数）
-        /// </summary>
-        public string passwordSigning {get; set;}
+        
         /// <summary>
         /// 是否开启订阅功能 0：不开启(默认) 1：开启 说明开启订阅功能时：pollCallBackUrl必须填入 此功能只针对有快递单号的单
         /// </summary>
         public string op {get; set;}
+        
         /// <summary>
         /// 如果op设置为1时，pollCallBackUrl必须填入，用于跟踪回调
         /// </summary>
         public string pollCallBackUrl {get; set;}
+
         /// <summary>
         /// 添加此字段表示开通行政区域解析功能 。
         /// 0：关闭（默认）
@@ -92,22 +85,7 @@ namespace Common.Request.BorderOfficial
         /// 4：开通行政解析功能以及物流轨迹增加物流高级状态名称、状态值并且返回出发、目的及当前城市信息(详见：快递信息推送接口文档)
         /// </summary>
         public string resultv2 {get; set;}
-        /// <summary>
-        /// 面单返回类型，默认为空，不返回面单内容。10：设备打印，20：生成图片短链回调。
-        /// </summary>
-        public string returnType {get; set;}
-        /// <summary>
-        /// 设备码，returnType为10时必填
-        /// </summary>
-        public string siid {get; set;}
-        /// <summary>
-        /// 模板编码，通过管理后台的电子面单模板信息获取 ，returnType不为空时必填
-        /// </summary>
-        public string tempid {get; set;}
-        /// <summary>
-        /// 打印状态回调地址，returnType为10时必填
-        /// </summary>
-        public string printCallBackUrl {get; set;}
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this,Formatting.Indented,new JsonSerializerSettings(){NullValueHandling = NullValueHandling.Ignore});

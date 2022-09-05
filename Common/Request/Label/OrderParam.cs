@@ -170,17 +170,17 @@ namespace Common.Request.Label
         ///  顺丰电子验收
         /// </summary>
         /// <value></value>
-        public int elecValidateType = null;
+        // public int elecValidateType ;
         /// <summary>
         ///  顺丰电子验收图片熟悉数量
         /// </summary>
         /// <value></value>
-        public int elecPicCount = null;
+        // public int elecPicCount;
         /// <summary>
         ///  顺丰手持设备扫描设置
         /// </summary>
         /// <value></value>
-        public int scanSupport = null;
+        public int scanSupport ;
         /// <summary>
         ///  文件url
         /// </summary>

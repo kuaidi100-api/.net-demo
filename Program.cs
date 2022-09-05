@@ -19,7 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Common.Request.Electronic.ocr;
 using Common.Request.Label;
-
+using Common.Request.Corder;
 class Program
 {
 
@@ -69,7 +69,10 @@ class Program
         // testBOrderOfficialQueryDetail();
         // testLabelOrder();
         // testLabelRepeatPrint();
-        testLabelCustomPrint();
+        // testLabelCustomPrint();
+        // testCOrder();
+        // testCOrderCancel();
+        testCOrderQueryPrice();
     }
 
     /// <summary>
@@ -598,7 +601,7 @@ class Program
         var baseParam = new StoreAuthParam()
         {
             shopType = "TAOBAO",
-            callbackUrl = "http://www.xxxx.com",
+            callBackUrl = "http://www.xxxx.com",
             salt = "123"
         };
         BaseReq<StoreAuthParam> baseReq = new BaseReq<StoreAuthParam>()
@@ -968,5 +971,83 @@ class Program
             sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
             param = orderParam,
         });
+    }
+
+       /// <summary>
+    /// C端寄件下单接口
+    /// 注意保存一下返回值(taskId和orderId)
+    /// </summary>
+    static void testCOrder()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new COrderParam()
+        {
+            kuaidicom = "shunfeng",
+            recManName = "张三",
+            recManMobile = "15994708912",
+            recManPrintAddr = "深圳市南山区金蝶软件园",
+            sendManName = "李四",
+            sendManMobile = "15994708912",
+            sendManPrintAddr = "深圳福田区华强北",
+            cargo = "文件",
+            weight = "1",
+            remark = "测试单，待会取消",
+            salt = "123",
+            callBackUrl = "http://www.xxxx.com"
+        };
+        BaseReq<COrderParam> baseReq = new BaseReq<COrderParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        Corder.order(baseReq);
+    }
+
+    /// <summary>
+    /// C端寄件下单取消接口
+    /// 入参为下单接口返回的taskId和orderId
+    /// </summary>
+    static void testCOrderCancel()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new COrderCancelParam()
+        {
+            taskId = "B25F2F0C7990889559107CEEC3B3045C",
+            orderId = "26743813",
+            cancelMsg = "测试单"
+        };
+        BaseReq<COrderCancelParam> baseReq = new BaseReq<COrderCancelParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        Corder.cancel(baseReq);
+    }
+
+    /// <summary>
+    /// C端寄件价格查询接口
+    /// 入参为下单接口返回的taskId和orderId
+    /// </summary>
+    static void testCOrderQueryPrice()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new COrderQueryPriceParam()
+        {
+            kuaidicom = "shunfeng",
+            sendManPrintAddr = "广东深圳市南山区",
+            recManPrintAddr = "北京海淀区"
+        };
+        BaseReq<COrderQueryPriceParam> baseReq = new BaseReq<COrderQueryPriceParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        Corder.queryPrice(baseReq);
     }
 }
