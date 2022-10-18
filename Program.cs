@@ -173,8 +173,95 @@ class Program
         });
     }
 
+     /// <summary>
+    /// 电子面单V2打印接口
+    /// </summary>
+    static void testLabelOrder()
+    {
+        var orderParam = new OrderParam()
+        {
+            kuaidicom = "zhaijisong",
+            sendMan = new ManInfo()
+            {
+                name = "张三",
+                mobile = "15****98256",
+                printAddr = "西藏日喀则市定日县珠穆朗玛峰",
+            },
+            recMan = new ManInfo()
+            {
+                name = "李四",
+                mobile = "15****98256",
+                printAddr = "西藏日喀则市定日县珠穆朗玛峰",
+            },
+            count = 1,
+            siid = config.siid,
+            tempId = "60f6c17c7c223700131d8bc3",
+            printType = "CLOUD"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.order(new BaseReq<OrderParam>()
+        {
+            method = ApiInfoConstant.ORDER,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
+            param = orderParam,
+        });
+    }
+
+     /// <summary>
+    /// 电子面单V2复打接口
+    /// </summary>
+    static void testLabelRepeatPrint()
+    {
+        var orderParam = new RepeatPrintParam()
+        {
+            
+            taskId = "638687EEB4744396A40F693541114E44"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.repeatPrint(new BaseReq<RepeatPrintParam>()
+        {
+            method = ApiInfoConstant.CLOUD_PRINT_OLD_METHOD,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
+            param = orderParam,
+        });
+    }
+
+     /// <summary>
+    /// 自定义接口
+    /// </summary>
+    static void testLabelCustomPrint()
+    {
+
+        var customParam =  new Dictionary<string, object>();
+        customParam.Add( "qrcode","888888888");
+        var orderParam = new CustomPrintParam()
+        {
+            
+            siid = config.siid,
+            tempId = "41b9d19ee56b45b5a23d7b6ace4f9029",
+            printType = "IMAGE",
+            customParam = customParam
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.customPrint(new BaseReq<CustomPrintParam>()
+        {
+            method = ApiInfoConstant.CUSTOM,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
+            param = orderParam,
+        });
+    }
+
     /// <summary>
-    /// 电子面单图片接口
+    /// 电子面单图片接口(v1版本示例，建议使用v2)
     /// </summary>
     static void testPrintImg()
     {
@@ -206,7 +293,7 @@ class Program
     }
 
     /// <summary>
-    /// 电子面单html接口
+    /// 电子面单html接口(v1版本示例，建议使用v2)
     /// </summary>
     static void testPrintHtml()
     {
@@ -241,7 +328,7 @@ class Program
     }
 
     /// <summary>
-    /// 电子面单打印接口
+    /// 电子面单打印接口(v1版本示例，建议使用v2)
     /// </summary>
     static void testPrintCloud()
     {
@@ -339,10 +426,10 @@ class Program
             kuaidicom = "jtexpress",
             recManName = "张三",
             recManMobile = "159953225555",
-            recManPrintAddr = "深圳市南山区金蝶软件园",
+            recManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             sendManName = "李四",
             sendManMobile = "15333333333",
-            sendManPrintAddr = "深圳福田区华强北",
+            sendManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             cargo = "文件",
             weight = "1",
             remark = "测试单，待会取消",
@@ -461,7 +548,7 @@ class Program
     }
 
     /// <summary>
-    /// 自定义打印接口
+    /// 自定义打印接口(v1版本示例，建议使用v2)
     /// </summary>
     static void testCloudPrintCustom()
     {
@@ -699,10 +786,10 @@ class Program
             storeId = "123456",
             recManName = "张三",
             recManMobile = "1599*****912",
-            recManPrintAddr = "深圳市南山区金蝶软件园",
+            recManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             sendManName = "李四",
             sendManMobile = "153******3333",
-            sendManPrintAddr = "深圳福田区华强北",
+            sendManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             price = 100,
             orderSourceType = "饿了么",
             weight = 1,
@@ -886,94 +973,8 @@ class Program
 
     }
 
+   
     /// <summary>
-    /// 电子面单V2打印接口
-    /// </summary>
-    static void testLabelOrder()
-    {
-        var orderParam = new OrderParam()
-        {
-            kuaidicom = "zhaijisong",
-            sendMan = new ManInfo()
-            {
-                name = "张三",
-                mobile = "15****98256",
-                printAddr = "广东省深圳市南山区科技南十二路",
-            },
-            recMan = new ManInfo()
-            {
-                name = "李四",
-                mobile = "15****98256",
-                printAddr = "北京市海淀区xxx路",
-            },
-            count = 1,
-            siid = config.siid,
-            tempId = "60f6c17c7c223700131d8bc3",
-            printType = "CLOUD"
-        };
-
-        var timestamp = DateUtils.GetTimestamp();
-        LabelV2.order(new BaseReq<OrderParam>()
-        {
-            method = ApiInfoConstant.ORDER,
-            key = config.key,
-            t = timestamp,
-            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
-            param = orderParam,
-        });
-    }
-
-     /// <summary>
-    /// 电子面单V2复打接口
-    /// </summary>
-    static void testLabelRepeatPrint()
-    {
-        var orderParam = new RepeatPrintParam()
-        {
-            
-            taskId = "638687EEB4744396A40F693541114E44"
-        };
-
-        var timestamp = DateUtils.GetTimestamp();
-        LabelV2.repeatPrint(new BaseReq<RepeatPrintParam>()
-        {
-            method = ApiInfoConstant.CLOUD_PRINT_OLD_METHOD,
-            key = config.key,
-            t = timestamp,
-            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
-            param = orderParam,
-        });
-    }
-
-     /// <summary>
-    /// 自定义接口
-    /// </summary>
-    static void testLabelCustomPrint()
-    {
-
-        var customParam =  new Dictionary<string, object>();
-        customParam.Add( "qrcode","888888888");
-        var orderParam = new CustomPrintParam()
-        {
-            
-            siid = config.siid,
-            tempId = "41b9d19ee56b45b5a23d7b6ace4f9029",
-            printType = "IMAGE",
-            customParam = customParam
-        };
-
-        var timestamp = DateUtils.GetTimestamp();
-        LabelV2.customPrint(new BaseReq<CustomPrintParam>()
-        {
-            method = ApiInfoConstant.CUSTOM,
-            key = config.key,
-            t = timestamp,
-            sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
-            param = orderParam,
-        });
-    }
-
-       /// <summary>
     /// C端寄件下单接口
     /// 注意保存一下返回值(taskId和orderId)
     /// </summary>
@@ -985,10 +986,10 @@ class Program
             kuaidicom = "shunfeng",
             recManName = "张三",
             recManMobile = "15994708912",
-            recManPrintAddr = "深圳市南山区金蝶软件园",
+            recManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             sendManName = "李四",
             sendManMobile = "15994708912",
-            sendManPrintAddr = "深圳福田区华强北",
+            sendManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             cargo = "文件",
             weight = "1",
             remark = "测试单，待会取消",
