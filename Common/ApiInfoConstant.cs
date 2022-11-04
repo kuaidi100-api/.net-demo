@@ -210,5 +210,13 @@ namespace Common
         /// cOrder
         /// </summary>
         public const string CORDER = "cOrder";
+         /// <summary>
+        ///  快递可用性接口url
+        /// </summary>
+        public const string EXPRESS_REACHABLE_URL = "http://api.kuaidi100.com/reachable.do";
+        /// <summary>
+        ///  快递可用性接口方法
+        /// </summary>
+        public const string EXPRESS_REACHABLE_METHOD = "reachable";
     }
 }

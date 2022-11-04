@@ -20,11 +20,12 @@ using System.Collections.Generic;
 using Common.Request.Electronic.ocr;
 using Common.Request.Label;
 using Common.Request.Corder;
+using Common.Request.reachable;
 class Program
 {
 
     //快递100的基础账号信息，可以在这里获取 (需要填写完整才能测试)
-    //https://poll.kuaidi100.com/manager/page/myinfo/enterprise
+    //https://api.kuaidi100.com/manager/v2/myinfo/enterprise
     private static KuaiDi100Config config = new KuaiDi100Config()
     {
         key = "",
@@ -72,7 +73,8 @@ class Program
         // testLabelCustomPrint();
         // testCOrder();
         // testCOrderCancel();
-        testCOrderQueryPrice();
+        // testCOrderQueryPrice();
+        testExpressReachable();
     }
 
     /// <summary>
@@ -985,10 +987,10 @@ class Program
         {
             kuaidicom = "shunfeng",
             recManName = "张三",
-            recManMobile = "15994708912",
+            recManMobile = "12345678910",
             recManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             sendManName = "李四",
-            sendManMobile = "15994708912",
+            sendManMobile = "12345678910",
             sendManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
             cargo = "文件",
             weight = "1",
@@ -1050,5 +1052,31 @@ class Program
             param = baseParam
         };
         Corder.queryPrice(baseReq);
+    }
+
+    /// <summary>
+    /// 快递可用性接口
+    /// </summary>
+    static void testExpressReachable()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new ExpressReachableParam()
+        {
+            kuaidicom = "shunfeng",
+            recManName = "张三",
+            recManMobile = "12345678910",
+            recManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
+            sendManName = "李四",
+            sendManMobile = "12345678910",
+            sendManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰"
+        };
+        BaseReq<ExpressReachableParam> baseReq = new BaseReq<ExpressReachableParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        ExpressReachable.query(baseReq);
     }
 }
