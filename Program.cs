@@ -21,6 +21,8 @@ using Common.Request.Electronic.ocr;
 using Common.Request.Label;
 using Common.Request.Corder;
 using Common.Request.reachable;
+using Common.Request.Bsamecity;
+
 class Program
 {
 
@@ -74,7 +76,11 @@ class Program
         // testCOrder();
         // testCOrderCancel();
         // testCOrderQueryPrice();
-        testExpressReachable();
+        //testExpressReachable();
+        //testBsamecityPrice();
+        //testBsamecityOrder();
+        //testBsamecityPrecancel();
+        testBsamecityAddfee();
     }
 
     /// <summary>
@@ -1078,5 +1084,178 @@ class Program
             param = baseParam
         };
         ExpressReachable.query(baseReq);
+    }
+
+    /// <summary>
+    /// 同城寄件-预下单
+    /// </summary>
+    static void testBsamecityPrice()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var mygoods = new Goods(){
+            name = "外卖",
+            type = "食品",
+            count = 1
+        };
+        var baseParam = new BsamecityOrderParam()
+        {
+            kuaidicom = "shunfengtongcheng",
+            lbsType = 2,
+            recManName = "顺丰同城",
+            recManMobile = "12345678910",
+            recManProvince = "北京市",
+            recManCity = "北京市",
+            recManDistrict = "海淀区",
+            recManAddr = "学清嘉创大厦A座15层",
+            recManLat = "40.014838",
+            recManLng = "116.352569",
+            sendManName = "测试",
+            sendManMobile = "12345678910",
+            sendManProvince = "北京",
+            sendManCity = "北京市",
+            sendManDistrict = "海淀区",
+            sendManAddr = "清华大学",
+            sendManLat = "40.002436",
+            sendManLng = "116.326582",
+            weight = "1",
+            remark = "测试下单",
+            volume = "",
+            orderType = 0,
+            expectPickupTime = "",
+            expectFinishTime = "",
+            insurance = "",
+            price = "0",
+            goods = new List<Goods>(){mygoods}
+        };
+        BaseReq<BsamecityOrderParam> baseReq = new BaseReq<BsamecityOrderParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        BsamecityOrder.price(baseReq);
+    }
+
+    /// <summary>
+    /// 同城寄件-下单
+    /// </summary>
+    static void testBsamecityOrder()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var mygoods = new Goods(){
+            name = "外卖",
+            type = "食品",
+            count = 1
+        };
+        var baseParam = new BsamecityOrderParam()
+        {
+            kuaidicom = "shunfengtongcheng",
+            lbsType = 2,
+            recManName = "顺丰同城",
+            recManMobile = "12345678910",
+            recManProvince = "北京市",
+            recManCity = "北京市",
+            recManDistrict = "海淀区",
+            recManAddr = "学清嘉创大厦A座15层",
+            recManLat = "40.014838",
+            recManLng = "116.352569",
+            sendManName = "测试",
+            sendManMobile = "12345678910",
+            sendManProvince = "北京",
+            sendManCity = "北京市",
+            sendManDistrict = "海淀区",
+            sendManAddr = "清华大学",
+            sendManLat = "40.002436",
+            sendManLng = "116.326582",
+            weight = "1",
+            remark = "测试下单",
+            volume = "",
+            salt = "",
+            orderType = 0,
+            expectPickupTime = "",
+            expectFinishTime = "",
+            insurance = "",
+            price = "0",
+            goods = new List<Goods>(){mygoods},
+            callbackUrl = "http://www.baidu.com"
+        };
+        BaseReq<BsamecityOrderParam> baseReq = new BaseReq<BsamecityOrderParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        BsamecityOrder.order(baseReq);
+    }
+
+    /// <summary>
+    /// 同城寄件-预取消
+    /// </summary>
+    static void testBsamecityPrecancel()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new BsamecityCancelParam()
+        {
+            orderId = "100241",
+            cancelMsgType = 1,
+            cancelMsg = "测试寄件",
+            taskId = "DE49A5C45B0845328CE0AE8EF9951EC5"
+        };
+        BaseReq<BsamecityCancelParam> baseReq = new BaseReq<BsamecityCancelParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        BsamecityOrder.precancel(baseReq);
+    }
+
+    /// <summary>
+    /// 同城寄件-取消
+    /// </summary>
+    static void testBsamecityCancel()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new BsamecityCancelParam()
+        {
+            orderId = "100241",
+            cancelMsgType = 1,
+            cancelMsg = "测试寄件",
+            taskId = "DE49A5C45B0845328CE0AE8EF9951EC5"
+        };
+        BaseReq<BsamecityCancelParam> baseReq = new BaseReq<BsamecityCancelParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        BsamecityOrder.cancel(baseReq);
+    }
+
+    /// <summary>
+    /// 同城寄件-加小费
+    /// </summary>
+    static void testBsamecityAddfee()
+    {
+        var timestamp = DateUtils.GetTimestamp();
+        var baseParam = new BsamecityAddfeeParam()
+        {
+            orderId = "100213",
+            remark = "",
+            taskId = "0E1536182BAE416080AC3C5DE6896F03",
+            tips = "10"
+        };
+        BaseReq<BsamecityAddfeeParam> baseReq = new BaseReq<BsamecityAddfeeParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
+            param = baseParam
+        };
+        BsamecityOrder.addfee(baseReq);
     }
 }

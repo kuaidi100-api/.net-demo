@@ -218,5 +218,29 @@ namespace Common
         ///  快递可用性接口方法
         /// </summary>
         public const string EXPRESS_REACHABLE_METHOD = "reachable";
+        /// <summary>
+        ///  同城寄件接口url
+        /// </summary>
+        public const string BSAMECITY_EXPRESS_URL = "https://api.kuaidi100.com/bsamecity/order";
+        /// <summary>
+        ///  同城寄件-预下单方法
+        /// </summary>
+        public const string BSAMECITY_EXPRESS_PRICE = "price";
+        /// <summary>
+        ///  同城寄件-下单方法
+        /// </summary>
+        public const string BSAMECITY_EXPRESS_ORDER = "order";
+        /// <summary>
+        ///  同城寄件-预取消方法
+        /// </summary>
+        public const string BSAMECITY_EXPRESS_PRECANCEL = "precancel";
+        /// <summary>
+        ///  同城寄件-取消方法
+        /// </summary>
+        public const string BSAMECITY_EXPRESS_CANCEL = "cancel";
+        /// <summary>
+        ///  同城寄件-加小费方法
+        /// </summary>
+        public const string BSAMECITY_EXPRESS_ADDFEE = "addfee";
     }
 }
