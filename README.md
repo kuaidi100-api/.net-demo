@@ -80,7 +80,8 @@ class Program
         //testBsamecityPrice();
         //testBsamecityOrder();
         //testBsamecityPrecancel();
-        testBsamecityAddfee();
+        //testBsamecityAddfee();
+        //testDeliveryTime();
     }
 
     /// <summary>
