@@ -145,6 +145,10 @@ namespace Common
         /// </summary>
         public const string CANCEL_METHOD = "cancel";
         /// <summary>
+        ///  快递预估时效
+        /// </summary>
+        public const string TIME = "time";
+        /// <summary>
         ///  指令打印方法
         /// </summary>
         public const string CLOUD_PRINT_COMMAND = "printCommand";

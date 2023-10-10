@@ -80,7 +80,8 @@ class Program
         //testBsamecityPrice();
         //testBsamecityOrder();
         //testBsamecityPrecancel();
-        testBsamecityAddfee();
+        //testBsamecityAddfee();
+        //testDeliveryTime();
     }
 
     /// <summary>
@@ -265,6 +266,33 @@ class Program
             t = timestamp,
             sign = SignUtils.GetMD5(orderParam.ToString() + timestamp + config.key + config.secret),
             param = orderParam,
+        });
+    }
+
+    /// <summary>
+    /// 快递预估时效查询接口
+    /// </summary>
+    static void testDeliveryTime()
+    {
+
+        var deliveryTimeParam = new DeliveryTimeParam()
+        {
+
+            kuaidicom = "jd",
+            from = "广东省深圳市南山区",
+            to = "广东省深圳市南山区",
+            orderTime = "2023-10-12 10:00:00",
+            expType = "特惠送"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.deliveryTime(new BaseReq<DeliveryTimeParam>()
+        {
+            method = ApiInfoConstant.TIME,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(deliveryTimeParam.ToString() + timestamp + config.key + config.secret),
+            param = deliveryTimeParam,
         });
     }
 

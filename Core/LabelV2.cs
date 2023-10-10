@@ -58,4 +58,21 @@ public static class LabelV2
         var result = HttpUtils.doPostForm(ApiInfoConstant.NEW_TEMPLATE_URL,request);
         return result;
     }
+
+    /// <summary>
+    /// 快递预估时效查询
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+     public static string deliveryTime(BaseReq<DeliveryTimeParam> param){
+        
+        param.method = ApiInfoConstant.TIME;
+        var request = ObjectToDictionaryUtils.ObjectToMap(param);
+        
+        if(request == null){
+            return null;
+        }
+        var result = HttpUtils.doPostForm(ApiInfoConstant.NEW_TEMPLATE_URL,request);
+        return result;
+    }
 }
