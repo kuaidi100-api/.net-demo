@@ -82,6 +82,7 @@ class Program
         //testBsamecityPrecancel();
         //testBsamecityAddfee();
         //testDeliveryTime();
+        //testBackOrder();
     }
 
     /// <summary>
@@ -293,6 +294,35 @@ class Program
             t = timestamp,
             sign = SignUtils.GetMD5(deliveryTimeParam.ToString() + timestamp + config.key + config.secret),
             param = deliveryTimeParam,
+        });
+    }
+
+    
+    /// <summary>
+    /// 运单附件查询接口
+    /// </summary>
+    static void testBackOrder()
+    {
+
+        var backOrderParam = new BackOrderParam()
+        {
+
+            kuaidicom = "shunfeng",
+            kuaidinum = "SF1234567",
+            imgType = 1,
+            partnerId = "12345678",
+            partnerKey = "12345678",
+            phone = "13088888888"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.backOrder(new BaseReq<BackOrderParam>()
+        {
+            method = ApiInfoConstant.BACKORDER,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(backOrderParam.ToString() + timestamp + config.key + config.secret),
+            param = backOrderParam,
         });
     }
 

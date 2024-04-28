@@ -149,6 +149,10 @@ namespace Common
         /// </summary>
         public const string TIME = "time";
         /// <summary>
+        ///  运单附件查询
+        /// </summary>
+        public const string BACKORDER = "backOrder";
+        /// <summary>
         ///  指令打印方法
         /// </summary>
         public const string CLOUD_PRINT_COMMAND = "printCommand";
