@@ -83,6 +83,8 @@ class Program
         //testBsamecityAddfee();
         //testDeliveryTime();
         //testBackOrder();
+        //testInterceptOrder();
+
     }
 
     /// <summary>
@@ -324,6 +326,46 @@ class Program
             sign = SignUtils.GetMD5(backOrderParam.ToString() + timestamp + config.key + config.secret),
             param = backOrderParam,
         });
+    }
+
+    /// <summary>
+    /// 订单拦截接口
+    /// </summary>
+    static void testInterceptOrder()
+    {
+
+        var interceptOrderParam = new InterceptOrderParam()
+        {
+
+            callbackUrl="http=//api.kuaidi100.com/test/callback",
+            interceptPayType="THIRDPARTY",
+            interceptType="MODIFY_ADDR",
+            kuaidicom="jtexpress",
+            kuaidinum="JT12345678",
+            orderId="123456789",
+            orderRole="1",
+            partnerId="12345678",
+            partnerKey="12345678",
+            reason="测试拦截",
+            salt="kuaidi1000api@salt",
+            recManInfo = new ManInfo()
+            {
+                name = "张三",
+                mobile = "130******66",
+                printAddr = "东省深圳市南山区粤海街道科技南十二路金蝶软件园",
+            },
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        LabelV2.InterceptOrder(new BaseReq<InterceptOrderParam>()
+        {
+            method = ApiInfoConstant.INTERCEPTORDER,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(interceptOrderParam.ToString() + timestamp + config.key + config.secret),
+            param = interceptOrderParam,
+        });
+
     }
 
     /// <summary>

@@ -92,4 +92,21 @@ public static class LabelV2
         var result = HttpUtils.doPostForm(ApiInfoConstant.NEW_TEMPLATE_URL,request);
         return result;
     }
+
+    /// <summary>
+    /// 订单拦截
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+     public static string InterceptOrder(BaseReq<InterceptOrderParam> param){
+    
+        param.method = ApiInfoConstant.INTERCEPTORDER;
+        var request = ObjectToDictionaryUtils.ObjectToMap(param);
+        
+        if(request == null){
+            return null;
+        }
+        var result = HttpUtils.doPostForm(ApiInfoConstant.NEW_TEMPLATE_URL,request);
+        return result;
+    }
 }

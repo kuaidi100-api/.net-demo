@@ -153,6 +153,10 @@ namespace Common
         /// </summary>
         public const string BACKORDER = "backOrder";
         /// <summary>
+        ///  订单拦截
+        /// </summary>
+        public const string INTERCEPTORDER = "interceptOrder";
+        /// <summary>
         ///  指令打印方法
         /// </summary>
         public const string CLOUD_PRINT_COMMAND = "printCommand";
