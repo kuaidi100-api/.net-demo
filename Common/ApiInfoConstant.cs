@@ -254,5 +254,9 @@ namespace Common
         ///  同城寄件-加小费方法
         /// </summary>
         public const string BSAMECITY_EXPRESS_ADDFEE = "addfee";
+        /// <summary>
+        ///  地址解析接口url
+        /// </summary>
+        public const string ADDRESS_RESOLUTION_URL = "https://api.kuaidi100.com/address/resolution";
     }
 }

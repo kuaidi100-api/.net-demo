@@ -22,6 +22,7 @@ using Common.Request.Label;
 using Common.Request.Corder;
 using Common.Request.reachable;
 using Common.Request.Bsamecity;
+using Common.Request.AddressResolution;
 
 class Program
 {
@@ -84,6 +85,7 @@ class Program
         //testDeliveryTime();
         //testBackOrder();
         //testInterceptOrder();
+        //testAddressResolution();
 
     }
 
@@ -325,6 +327,28 @@ class Program
             t = timestamp,
             sign = SignUtils.GetMD5(backOrderParam.ToString() + timestamp + config.key + config.secret),
             param = backOrderParam,
+        });
+    }
+
+    /// <summary>
+    /// 地址解析接口
+    /// </summary>
+    static void testAddressResolution()
+    {
+
+        var addressResolutionParam = new AddressResolutionParam()
+        {
+
+            content = "张三广东省深圳市南山区粤海街道科技南十二路金蝶软件园13088888888"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        AddressResolution.addressResolution(new AddressResolutionReq<AddressResolutionParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(addressResolutionParam.ToString() + timestamp + config.key + config.secret),
+            param = addressResolutionParam,
         });
     }
 
