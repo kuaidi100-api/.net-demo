@@ -258,5 +258,9 @@ namespace Common
         ///  地址解析接口url
         /// </summary>
         public const string ADDRESS_RESOLUTION_URL = "https://api.kuaidi100.com/address/resolution";
+        /// <summary>
+        ///  国际地址解析接口url
+        /// </summary>
+        public const string INT_ADDRESS_RESOLUTION_URL = "https://api.kuaidi100.com/internationalAddress/resolution";
     }
 }

@@ -85,6 +85,7 @@ class Program
         //testBackOrder();
         //testInterceptOrder();
         //testAddressResolution();
+        //testIntAddressResolution();
     }
 
     /// <summary>
@@ -376,7 +377,6 @@ class Program
 
         var addressResolutionParam = new AddressResolutionParam()
         {
-
             content = "张三广东省深圳市南山区粤海街道科技南十二路金蝶软件园13088888888"
         };
 
@@ -387,6 +387,28 @@ class Program
             t = timestamp,
             sign = SignUtils.GetMD5(addressResolutionParam.ToString() + timestamp + config.key + config.secret),
             param = addressResolutionParam,
+        });
+    }
+
+    /// <summary>
+    /// 国际地址解析接口
+    /// </summary>
+    static void testIntAddressResolution()
+    {
+
+        var intAddressResolutionParam = new IntAddressResolutionParam()
+        {
+            country = "United States",
+            address = "24300 Nandina Ave Moreno Valley, CA"
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        IntAddressResolution.addressResolution(new AddressResolutionReq<IntAddressResolutionParam>()
+        {
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(intAddressResolutionParam.ToString() + timestamp + config.key + config.secret),
+            param = intAddressResolutionParam
         });
     }
 
