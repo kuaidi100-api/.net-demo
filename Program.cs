@@ -360,8 +360,9 @@ class Program
 
         var intAddressResolutionParam = new IntAddressResolutionParam()
         {
-            country = "United States",
-            address = "24300 Nandina Ave Moreno Valley, CA"
+            code = "US",
+            address = "24300 Nandina Ave Moreno Valley, CA",
+            language = "zh"
         };
 
         var timestamp = DateUtils.GetTimestamp();
