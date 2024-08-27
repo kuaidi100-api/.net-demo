@@ -1416,8 +1416,8 @@ class Program
         {
             
             sendAddr = "广东深圳",
-            receiveAddr = "北京海淀",
-            companyName = "jd",
+            recAddr = "北京海淀",
+            kuaidicom = "jd",
             weight = 10.0
         };
 

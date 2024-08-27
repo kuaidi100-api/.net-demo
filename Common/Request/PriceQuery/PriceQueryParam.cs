@@ -16,12 +16,12 @@ namespace Common.Request.PriceQuery
         ///  收件地
         /// </summary>
         /// <value></value>
-        public string receiveAddr;
+        public string recAddr;
         /// <summary>
         ///  快递公司编码
         /// </summary>
         /// <value></value>
-        public string companyName;
+        public string kuaidicom;
         /// <summary>
         ///  重量
         /// </summary>
