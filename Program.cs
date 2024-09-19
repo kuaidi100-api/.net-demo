@@ -23,6 +23,7 @@ using Common.Request.Corder;
 using Common.Request.reachable;
 using Common.Request.Bsamecity;
 using Common.Request.AddressResolution;
+using Common.Request.PriceQuery;
 
 class Program
 {
@@ -87,7 +88,7 @@ class Program
         //testInterceptOrder();
         //testAddressResolution();
         //testIntAddressResolution();
-
+        testPriceQuery();
     }
 
     /// <summary>
@@ -1404,5 +1405,30 @@ class Program
             param = baseParam
         };
         BsamecityOrder.addfee(baseReq);
+    }
+
+    /// <summary>
+    /// 价格查询接口
+    /// </summary>
+    static void testPriceQuery()
+    {
+        var priceParam = new PriceQueryParam()
+        {
+            
+            sendAddr = "广东深圳",
+            recAddr = "北京海淀",
+            kuaidicom = "jd",
+            weight = 10.0
+        };
+
+        var timestamp = DateUtils.GetTimestamp();
+        PriceQuery.query(new BaseReq<PriceQueryParam>()
+        {
+            method = ApiInfoConstant.PRICE,
+            key = config.key,
+            t = timestamp,
+            sign = SignUtils.GetMD5(priceParam.ToString() + timestamp + config.key + config.secret),
+            param = priceParam,
+        });
     }
 }
