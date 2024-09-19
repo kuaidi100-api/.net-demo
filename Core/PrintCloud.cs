@@ -31,7 +31,7 @@ public class PrintCloud{
         if(request == null){
             return null;
         }
-        var result = HttpUtils.doPostForm(ApiInfoConstant.ELECTRONIC_ORDER_HTML_URL,request);
+        var result = HttpUtils.doPostForm(ApiInfoConstant.NEW_TEMPLATE_URL,request);
         return result;
     }
 }   
