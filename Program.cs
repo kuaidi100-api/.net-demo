@@ -1071,9 +1071,11 @@ class Program
             partnerId = "",
             partnerKey = "",
             net = "",
-            kuaidicom = "shunfeng",
-            kuaidinum = "SF136*****3507",
+            kuaidicom = "",
+            kuaidinum = "136*****3507",
             orderId = "016455*****25zosNIq",
+            checkMan = "123",
+            expType = "标准快递",
             reason = "地址错误"
         };
         BaseReq<CancelPrint> baseReq = new BaseReq<CancelPrint>()

@@ -46,6 +46,16 @@ namespace Common.Request.Electronic
         /// </summary>
         public string reason { get; set; }
 
+        /// <summary>
+        /// 业务员编码，部分快递公司必填
+        /// </summary>
+        public string checkMan { get; set; }
+
+        /// <summary>
+        /// 业务产品类型，部分快递公司必填
+        /// </summary>
+        public string expType { get; set; }
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
