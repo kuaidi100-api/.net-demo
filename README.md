@@ -61,10 +61,6 @@ class Program
         // testThirdPlatformStoreAuth();
         // testThirdPlatformCommitTask();
         // testThirdPlatformUploadNum();
-        // testSameCityStoreAuth();
-        // testSameCityOrder();
-        // testSameCityQuery();
-        // testSameCityCancel();
         // testThirdPlatformAuth();
         // testThirdPlatBranchInfo();
         // testLabelCancel();
@@ -901,115 +897,7 @@ class Program
         ThirdPlatformOrder.uploadNum(baseReq);
     }
 
-    /// <summary>
-    /// 同城配送账号授权接口
-    /// </summary>
-    static void testSameCityStoreAuth()
-    {
-
-        var timestamp = DateUtils.GetTimestamp();
-        var baseParam = new SameCityAuthParam()
-        {
-            com = "shansong",
-            storeId = "123456",
-            callbackUrl = "http://www.xxxx.com"
-        };
-        BaseReq<SameCityAuthParam> baseReq = new BaseReq<SameCityAuthParam>()
-        {
-            key = config.key,
-            t = timestamp,
-            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
-            param = baseParam
-        };
-        SameCity.auth(baseReq);
-    }
-
-    /// <summary>
-    /// 同城配送下单
-    /// </summary>
-    static void testSameCityOrder()
-    {
-
-        var timestamp = DateUtils.GetTimestamp();
-        var baseParam = new SameCityOrderParam()
-        {
-            partnerId = "199****601",
-            partnerKey = "806cdf87*******dfb000326375d",
-            com = "kfw",
-            storeId = "123456",
-            recManName = "张三",
-            recManMobile = "1599*****912",
-            recManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
-            sendManName = "李四",
-            sendManMobile = "153******3333",
-            sendManPrintAddr = "西藏日喀则市定日县珠穆朗玛峰",
-            price = 100,
-            orderSourceType = "饿了么",
-            weight = 1,
-            remark = "测试单，待会取消",
-            serviceType = "火锅",
-            salt = "123",
-            callbackUrl = "http://www.xxxx.com",
-            orderSourceNo = "1233",
-            orderType = 0
-
-        };
-        BaseReq<SameCityOrderParam> baseReq = new BaseReq<SameCityOrderParam>()
-        {
-            key = config.key,
-            t = timestamp,
-            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
-            param = baseParam
-        };
-        SameCity.order(baseReq);
-    }
-
-    /// <summary>
-    /// 同城配送查询订单
-    /// </summary>
-    static void testSameCityQuery()
-    {
-
-        var timestamp = DateUtils.GetTimestamp();
-        var baseParam = new SameCityQueryParam()
-        {
-            taskId = "EE815B30*****2FEE0EBFEC3",
-            orderId = "10003****SWiZ",
-        };
-        BaseReq<SameCityQueryParam> baseReq = new BaseReq<SameCityQueryParam>()
-        {
-            key = config.key,
-            t = timestamp,
-            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
-            param = baseParam
-        };
-        SameCity.query(baseReq);
-    }
-
-
-    /// <summary>
-    /// 同城配送取消下单接口
-    /// </summary>
-    static void testSameCityCancel()
-    {
-
-        var timestamp = DateUtils.GetTimestamp();
-        var baseParam = new SameCityCancelParam()
-        {
-            taskId = "EE815B30B5*****B8D522FEE0EBFEC3",
-            orderId = "1000****WiZ",
-            cancelMsg = "地址信息填错啦，重新下单"
-        };
-        BaseReq<SameCityCancelParam> baseReq = new BaseReq<SameCityCancelParam>()
-        {
-            key = config.key,
-            t = timestamp,
-            sign = SignUtils.GetMD5(baseParam.ToString() + timestamp + config.key + config.secret),
-            param = baseParam
-        };
-        SameCity.cancel(baseReq);
-    }
-
+    
     /// <summary>
     /// 第三方电商平台账号授权
     /// </summary>
