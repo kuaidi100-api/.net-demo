@@ -844,7 +844,7 @@ class Program
         var baseParam = new StoreAuthParam()
         {
             shopType = "TAOBAO",
-            callBackUrl = "http://www.xxxx.com",
+            callbackUrl = "http://www.xxxx.com",
             salt = "123"
         };
         BaseReq<StoreAuthParam> baseReq = new BaseReq<StoreAuthParam>()
