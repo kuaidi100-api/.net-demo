@@ -42,7 +42,7 @@ namespace Common.Request.cloud
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this,Formatting.Indented,new JsonSerializerSettings(){NullValueHandling = NullValueHandling.Ignore});
+            return JsonConvert.SerializeObject(this,Formatting.None,new JsonSerializerSettings(){NullValueHandling = NullValueHandling.Ignore});
         }
     }
 }
